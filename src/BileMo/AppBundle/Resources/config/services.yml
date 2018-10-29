@@ -1,0 +1,4 @@
+services:
+#    bile_mo_app.example:
+#        class: BileMo\AppBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
