@@ -1,3 +1,0 @@
-fx_user_homepage:
-    path:     /
-    defaults: { _controller: FxUserBundle:Default:index }

@@ -4,9 +4,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "BileMo\\AppBundle\\": "src/BileMo/AppBundle",
-            "Fx\\UserBundle\\": "src/Fx/UserBundle",
-            "CoreBundle\\": "src/CoreBundle"
+            "BileMo\\AppBundle\\": "src/BileMo/AppBundle"
         },
         "classmap": [
             "app/AppKernel.php",
