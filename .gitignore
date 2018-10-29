@@ -49,4 +49,7 @@
 **/Entity/*~
 
 # Embedded web-server pid file
-/.web-server-pid 
+/.web-server-pid
+
+#Phpstorm
+/.idea/
