@@ -2,10 +2,15 @@
 # https://symfony.com/doc/current/security.html
 security:
 
+    encoders:
+        BileMo\AppBundle\Entity\User: bcrypt
+
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+        user_db_provider:
+            entity:
+                class: BileMoAppBundle:User
+                property: username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
