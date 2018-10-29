@@ -1,6 +1,6 @@
 <?php
 
-namespace Fx\UserBundle\Entity;
+namespace BileMo\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 /**
  * @ORM\Table(name="users")
- * @ORM\Entity(repositoryClass="Fx\UserBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="BileMo\AppBundle\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken, please choose another one.")
  * @UniqueEntity(fields="username", message="Username already taken, please choose another one.")
  */
