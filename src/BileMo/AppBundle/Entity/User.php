@@ -248,8 +248,6 @@ class User implements UserInterface, \Serializable
          * A listener will be called in order to encode the password
          */
         $this->password = null;
-        $this->forgottenPasswordKey = null;
-        $this->forgottenPasswordKeyExpiresAt = null;
 
         return $this;
     }
