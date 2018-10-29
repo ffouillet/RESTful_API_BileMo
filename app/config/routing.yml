@@ -1,3 +1,7 @@
+fx_user:
+    resource: "@FxUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 bile_mo_app:
     resource: "@BileMoAppBundle/Resources/config/routing.yml"
     prefix:   /
