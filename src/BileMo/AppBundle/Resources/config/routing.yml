@@ -1,0 +1,3 @@
+bile_mo_app_homepage:
+    path:     /
+    defaults: { _controller: BileMoAppBundle:Default:index }

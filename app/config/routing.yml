@@ -1,6 +1,6 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+bile_mo_app:
+    resource: "@BileMoAppBundle/Resources/config/routing.yml"
+    prefix:   /
 
 app.swagger_ui:
     path: /api/doc
