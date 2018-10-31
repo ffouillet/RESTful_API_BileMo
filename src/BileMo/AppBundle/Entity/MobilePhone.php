@@ -3,12 +3,16 @@
 namespace BileMo\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * MobilePhone
  *
  * @ORM\Table(name="mobile_phone")
  * @ORM\Entity(repositoryClass="BileMo\AppBundle\Repository\MobilePhoneRepository")
+ *
+ * @ExclusionPolicy("all")
  */
 class MobilePhone
 {
@@ -25,6 +29,8 @@ class MobilePhone
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     *
+     * @Expose
      */
     private $name;
 
@@ -32,6 +38,8 @@ class MobilePhone
      * @var float
      *
      * @ORM\Column(name="price", type="float")
+     *
+     * @Expose
      */
     private $price;
 
@@ -39,6 +47,8 @@ class MobilePhone
      * @var \DateTime
      *
      * @ORM\Column(name="releasedAt", type="datetime")
+     *
+     * @Expose
      */
     private $releasedAt;
 
@@ -46,6 +56,8 @@ class MobilePhone
      * @var int
      *
      * @ORM\Column(name="batteryCapacity", type="integer")
+     *
+     * @Expose
      */
     private $batteryCapacity;
 
@@ -53,6 +65,8 @@ class MobilePhone
      * @var int
      *
      * @ORM\Column(name="builtInStorage", type="integer")
+     *
+     * @Expose
      */
     private $builtInStorage;
 
@@ -60,6 +74,8 @@ class MobilePhone
      * @var float
      *
      * @ORM\Column(name="cpuClockSpeed", type="float")
+     *
+     * @Expose
      */
     private $cpuClockSpeed;
 
@@ -67,6 +83,8 @@ class MobilePhone
      * @var int
      *
      * @ORM\Column(name="ram", type="integer")
+     *
+     * @Expose
      */
     private $ram;
 
@@ -74,6 +92,8 @@ class MobilePhone
      * @var int
      *
      * @ORM\Column(name="rearCameraResolution", type="integer")
+     *
+     * @Expose
      */
     private $rearCameraResolution;
 
@@ -81,6 +101,8 @@ class MobilePhone
      * @var int
      *
      * @ORM\Column(name="frontCameraResolution", type="integer", nullable=true)
+     *
+     * @Expose
      */
     private $frontCameraResolution;
 

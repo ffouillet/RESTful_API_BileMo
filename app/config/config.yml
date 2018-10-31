@@ -77,6 +77,7 @@ nelmio_api_doc:
 fos_rest:
     body_converter:
         enabled: true
+    param_fetcher_listener: true
     view:
         view_response_listener: true
         formats: { json: true, xml: false, rss: false }

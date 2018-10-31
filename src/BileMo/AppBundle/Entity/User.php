@@ -3,6 +3,8 @@
 namespace BileMo\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,6 +16,7 @@ use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
  * @ORM\Entity(repositoryClass="BileMo\AppBundle\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken, please choose another one.")
  * @UniqueEntity(fields="username", message="Username already taken, please choose another one.")
+ * @ExclusionPolicy("all")
  */
 class User implements UserInterface, \Serializable
 {
@@ -37,6 +40,7 @@ class User implements UserInterface, \Serializable
      *     max=25,
      *     maxMessage="Username must not contain more than 25 characters."
      * )
+     * @Expose
      *
      */
     private $username;
@@ -64,6 +68,8 @@ class User implements UserInterface, \Serializable
      *     max=100,
      *     maxMessage="Username firstName must not contain more than 100 characters."
      * )
+     *
+     * @Expose
      */
     private $firstName;
 
@@ -78,6 +84,8 @@ class User implements UserInterface, \Serializable
      *     max=100,
      *     maxMessage="Username last name must not contain more than 100 characters."
      * )
+     *
+     * @Expose
      */
     private $lastName;
 
@@ -88,6 +96,8 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
+     *
+     * @Expose
      */
     private $createdAt;
 
@@ -95,6 +105,8 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=254, unique=true)
      * @Assert\NotBlank()
      * @Assert\Email()
+     *
+     * @Expose
      */
     private $email;
 
