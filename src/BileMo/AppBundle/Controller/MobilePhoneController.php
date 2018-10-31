@@ -2,13 +2,14 @@
 
 namespace BileMo\AppBundle\Controller;
 
+use BileMo\AppBundle\Entity\MobilePhone;
 use BileMo\AppBundle\Representation\MobilePhones;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\Controller\Annotations as REST;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use FOS\RestBundle\Controller\Annotations\Get as Get;
-use FOS\RestBundle\Controller\Annotations\QueryParam as QueryParam;
-use FOS\RestBundle\Controller\Annotations\View as View;
+
 
 
 class MobilePhoneController extends Controller
@@ -21,32 +22,32 @@ class MobilePhoneController extends Controller
     }
 
     /**
-     * @Get("/mobiles", name="mobile_phones_list")
-     * @QueryParam(
+     * @REST\Get("/mobiles", name="show_mobile_phones_list")
+     * @REST\QueryParam(
      *     name="attributeToOrderBy",
      *     requirements="\w+",
      *     default="",
      *     description="Sort order [by name] (asc or desc)"
      * )
-     * @QueryParam(
+     * @REST\QueryParam(
      *     name="order",
      *     requirements="asc|desc",
      *     default="asc",
      *     description="Sort order [by name] (asc or desc)"
      * )
-     * @QueryParam(
+     * @REST\QueryParam(
      *     name="limit",
      *     requirements="\d+",
      *     default="20",
      *     description="Max number of mobiles phones per page."
      * )
-     * @QueryParam(
+     * @REST\QueryParam(
      *     name="offset",
      *     requirements="\d+",
      *     default="0",
      *     description="The pagination offset"
      * )
-     * @View
+     * @REST\View(StatusCode = 200)
      */
     public function listAction(ParamFetcherInterface $paramFetcher)
     {
@@ -58,5 +59,18 @@ class MobilePhoneController extends Controller
         );
 
         return new MobilePhones($pager);
+    }
+
+    /**
+     * @REST\Get(
+     *		path = "/mobile/{id}",
+     *		name = "show_mobile_phone_details",
+     *		requirements = {"id"="\d+"}
+     * )
+     * @REST\View(StatusCode = 200)
+     */
+    public function showAction(MobilePhone $mobilePhone)
+    {
+        return $mobilePhone;
     }
 }
