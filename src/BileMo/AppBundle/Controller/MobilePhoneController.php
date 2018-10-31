@@ -10,8 +10,6 @@ use FOS\RestBundle\Controller\Annotations as REST;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-
-
 class MobilePhoneController extends Controller
 {
     private $em;
@@ -63,7 +61,7 @@ class MobilePhoneController extends Controller
 
     /**
      * @REST\Get(
-     *		path = "/mobile/{id}",
+     *		path = "/mobiles/{id}",
      *		name = "show_mobile_phone_details",
      *		requirements = {"id"="\d+"}
      * )
