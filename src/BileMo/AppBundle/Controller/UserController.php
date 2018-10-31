@@ -126,4 +126,18 @@ class UserController extends Controller
 
         return $user;
     }
+
+    /**
+     * @REST\Delete(
+     *		path = "/users/{id}",
+     *		name = "delete_user",
+     *		requirements = {"id"="\d+"}
+     * )
+     * @REST\View(StatusCode = 204)
+     */
+    public function deleteAction(User $user)
+    {
+        $this->em->remove($user);
+        $this->em->flush();
+    }
 }
