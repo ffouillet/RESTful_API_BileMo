@@ -3,6 +3,7 @@
 namespace BileMo\AppBundle\Controller;
 
 use BileMo\AppBundle\Entity\User;
+use BileMo\AppBundle\Exception\ResourceValidationException;
 use BileMo\AppBundle\Representation\Users;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -10,6 +11,7 @@ use FOS\RestBundle\Controller\Annotations as REST;
 use phpDocumentor\Reflection\DocBlock\Tags\Param;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserController extends Controller
@@ -80,7 +82,7 @@ class UserController extends Controller
      *     name = "create_user"
      * )
      * @REST\View(StatusCode = 201)
-     * @REST\RequestParam(
+     * @REST\RequestParam(git
      *		name = "username",
      * 		description = "User's username."
      * )
@@ -117,7 +119,13 @@ class UserController extends Controller
         $userValidationErrors = $validator->validate($user);
 
         if(sizeof($userValidationErrors) > 0) {
-            die('errors');
+            $errorMessage = "Unable to add the resource, the JSON sent contains invalid datas. Here are the errors you need to correct :";
+
+            foreach($userValidationErrors as $validationError) {
+                $errorMessage .= sprintf('Field %s : %s', $validationError->getPropertyPath(), $validationError->getMessage());
+            }
+
+            throw new ResourceValidationException($errorMessage);
         }
 
         // Save new user if no errors.
