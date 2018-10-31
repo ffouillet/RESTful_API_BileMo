@@ -1,6 +1,6 @@
 bile_mo_app:
     resource: "@BileMoAppBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /api
 
 app.swagger_ui:
     path: /api/doc
