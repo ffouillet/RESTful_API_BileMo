@@ -73,3 +73,20 @@ nelmio_api_doc:
         - ^/api(?!/doc$)
         host_patterns:
         - ^api\.
+
+fos_rest:
+    body_converter:
+        enabled: true
+    param_fetcher_listener: true
+    view:
+        view_response_listener: true
+        formats: { json: true, xml: false, rss: false }
+    serializer:
+        serialize_null: true
+    format_listener:
+        rules:
+        - { path: '^/', priorities: ['json'], fallback_format: 'json' }
+
+
+
+
