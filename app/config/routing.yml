@@ -1,3 +1,7 @@
+o_auth_server:
+    resource: "@OAuthServerBundle/Resources/config/routing.yml"
+    prefix:   /
+
 bile_mo_app:
     resource: "@BileMoAppBundle/Resources/config/routing.yml"
     prefix:   /api
