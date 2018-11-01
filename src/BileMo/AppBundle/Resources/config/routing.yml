@@ -1,3 +1,7 @@
 bile_mo_app_mobile_phones:
     resource: "@BileMoAppBundle/Controller/MobilePhoneController.php"
     type:     annotation
+
+bile_mo_app_users:
+    resource: "@BileMoAppBundle/Controller/UserController.php"
+    type:     annotation

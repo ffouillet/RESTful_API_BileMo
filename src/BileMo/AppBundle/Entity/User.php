@@ -31,8 +31,8 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=25, unique=true)
      * @Assert\NotBlank()
      * @Assert\Regex(
-     *     pattern="/^[A-Za-z0-9]+$/",
-     *     message="Username can only contain letters (a-z), numbers or following characters : -_."
+     *     pattern="/^[A-Za-z0-9-_]+$/",
+     *     message="Username can only contain letters (a-z), numbers or following characters : -_"
      * )
      * @Assert\Length(
      *     min=3,
@@ -47,11 +47,11 @@ class User implements UserInterface, \Serializable
 
     /**
      * @Assert\NotBlank(
-     *     message="Password cannot be empty."
+     *     message="User's password cannot be empty."
      * )
      * @Assert\Length(
      *     min=8,
-     *     minMessage="Password must contain at least 8 characters",
+     *     minMessage="User's password must contain at least 8 characters",
      *     max=4096,
      * )
      */
@@ -60,13 +60,17 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(
-     *     message="Password cannot be empty."
+     *     message="User's first name cannot be empty."
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[A-Za-z0-9-_\. ]+$/",
+     *     message="User's first name can only contain letters (a-z), numbers or following characters : -_."
      * )
      * @Assert\Length(
      *     min=2,
-     *     minMessage="User firstName must contain at least 2 characters.",
+     *     minMessage="User's firstName must contain at least 2 characters.",
      *     max=100,
-     *     maxMessage="Username firstName must not contain more than 100 characters."
+     *     maxMessage="User's firstName must not contain more than 100 characters."
      * )
      *
      * @Expose
@@ -76,13 +80,17 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(
-     *     message="Password cannot be empty."
+     *     message="User's last name cannot be empty."
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[A-Za-z0-9-_\. ]+$/",
+     *     message="User's last name can only contain letters (a-z), numbers or following characters : -_."
      * )
      * @Assert\Length(
      *     min=2,
-     *     minMessage="User last name must contain at least 2 characters.",
+     *     minMessage="User's last name must contain at least 2 characters.",
      *     max=100,
-     *     maxMessage="Username last name must not contain more than 100 characters."
+     *     maxMessage="User's last name must not contain more than 100 characters."
      * )
      *
      * @Expose
