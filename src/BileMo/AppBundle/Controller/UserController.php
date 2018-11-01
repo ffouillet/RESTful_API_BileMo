@@ -82,25 +82,30 @@ class UserController extends Controller
      *     name = "create_user"
      * )
      * @REST\View(StatusCode = 201)
-     * @REST\RequestParam(git
+     * @REST\RequestParam(
      *		name = "username",
-     * 		description = "User's username."
+     * 		description = "User's username.",
+     *      strict = false
      * )
      * @REST\RequestParam(
      *		name = "email",
-     * 		description = "User's email address."
+     * 		description = "User's email address.",
+     *      strict = false
      * )
      * @REST\RequestParam(
      *		name = "password",
-     * 		description = "User's password."
+     * 		description = "User's password.",
+     *      strict = false
      * )
      * @REST\RequestParam(
      *		name = "first_name",
-     * 		description = "User's first name."
+     * 		description = "User's first name.",
+     *      strict = false
      * )
      * @REST\RequestParam(
      *		name = "last_name",
-     * 		description = "User's last name."
+     * 		description = "User's last name.",
+     *      strict = false
      * )
      */
     public function createAction(ParamFetcherInterface $paramFetcher, ValidatorInterface $validator){
@@ -122,7 +127,15 @@ class UserController extends Controller
             $errorMessage = "Unable to add the resource, the JSON sent contains invalid datas. Here are the errors you need to correct :";
 
             foreach($userValidationErrors as $validationError) {
-                $errorMessage .= sprintf('Field %s : %s', $validationError->getPropertyPath(), $validationError->getMessage());
+
+                //We will show propertyPath as 'password' instead of 'plainPassword' to user (not to perturb him) in case there is a validation error on this field.
+                $propertyPath = $validationError->getPropertyPath();
+
+                if($propertyPath == 'plainPassword') {
+                    $propertyPath = 'password';
+                }
+
+                $errorMessage .= sprintf(' Field \'%s\' : %s', $propertyPath, $validationError->getMessage());
             }
 
             throw new ResourceValidationException($errorMessage);
