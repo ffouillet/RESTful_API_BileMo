@@ -1,6 +1,8 @@
-o_auth_server:
-    resource: "@OAuthServerBundle/Resources/config/routing.yml"
-    prefix:   /
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+
+fos_oauth_server_authorize:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
 
 bile_mo_app:
     resource: "@BileMoAppBundle/Resources/config/routing.yml"
@@ -10,3 +12,4 @@ app.swagger_ui:
     path: /api/doc
     methods: GET
     defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+

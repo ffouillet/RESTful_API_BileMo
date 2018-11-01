@@ -33,6 +33,10 @@ framework:
     php_errors:
         log: true
 
+    # Workaround for FOSOauthServerBundle
+    templating:
+        engines: ['twig']
+
 # Twig Configuration
 twig:
     debug: '%kernel.debug%'
@@ -88,6 +92,15 @@ fos_rest:
         rules:
         - { path: '^/', priorities: ['json'], fallback_format: 'json' }
 
+fos_oauth_server:
+    db_driver: orm       # Drivers available: orm, mongodb, or propel
+    client_class:        OAuthServerBundle\Entity\Client
+    access_token_class:  OAuthServerBundle\Entity\AccessToken
+    refresh_token_class: OAuthServerBundle\Entity\RefreshToken
+    auth_code_class:     OAuthServerBundle\Entity\AuthCode
+
+    service:
+        user_provider: BileMo\AppBundle\Security\UserProvider
 
 
 
