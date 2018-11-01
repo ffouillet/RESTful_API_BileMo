@@ -5,6 +5,8 @@ namespace BileMo\AppBundle\Controller;
 use BileMo\AppBundle\Entity\MobilePhone;
 use BileMo\AppBundle\Representation\MobilePhones;
 use Doctrine\ORM\EntityManagerInterface;
+use Hateoas\Configuration\Route;
+use Hateoas\Representation\Factory\PagerfantaFactory;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as REST;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -56,7 +58,15 @@ class MobilePhoneController extends Controller
             $paramFetcher->get('order')
         );
 
-        return new MobilePhones($pager);
+        // Add links to pagination (with that, API get now to level 3 of Richardson Maturity Model)
+        $pagerfantaFactory   = new PagerfantaFactory();
+
+        $paginatedCollection = $pagerfantaFactory->createRepresentation(
+            $pager,
+            new Route('show_mobile_phones_list', array(), true)
+        );
+
+        return $paginatedCollection;
     }
 
     /**

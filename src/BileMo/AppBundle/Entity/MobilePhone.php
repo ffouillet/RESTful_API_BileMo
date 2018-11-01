@@ -3,6 +3,7 @@
 namespace BileMo\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 
@@ -13,6 +14,15 @@ use JMS\Serializer\Annotation\Expose;
  * @ORM\Entity(repositoryClass="BileMo\AppBundle\Repository\MobilePhoneRepository")
  *
  * @ExclusionPolicy("all")
+ *
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "show_mobile_phone_details",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      )
+ * )
  */
 class MobilePhone
 {

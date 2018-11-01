@@ -3,6 +3,7 @@
 namespace BileMo\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -17,6 +18,30 @@ use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
  * @UniqueEntity(fields="email", message="Email already taken, please choose another one.")
  * @UniqueEntity(fields="username", message="Username already taken, please choose another one.")
  * @ExclusionPolicy("all")
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "show_user_details",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      )
+ * )
+ * @Hateoas\Relation(
+ *      "create",
+ *      href = @Hateoas\Route(
+ *          "create_user",
+ *          absolute = true
+ *      )
+ * )
+ * @Hateoas\Relation(
+ *      "delete",
+ *      href = @Hateoas\Route(
+ *          "delete_user",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      )
+ * )
+
  */
 class User implements UserInterface, \Serializable
 {
