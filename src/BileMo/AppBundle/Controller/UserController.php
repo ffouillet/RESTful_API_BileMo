@@ -8,7 +8,8 @@ use BileMo\AppBundle\Representation\Users;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as REST;
-use phpDocumentor\Reflection\DocBlock\Tags\Param;
+use Hateoas\Configuration\Route;
+use Hateoas\Representation\Factory\PagerfantaFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -60,7 +61,15 @@ class UserController extends Controller
             $paramFetcher->get('order')
         );
 
-        return new Users($pager);
+        // Add links to pagination (with that, API get now to level 3 of Richardson Maturity Model)
+        $pagerfantaFactory   = new PagerfantaFactory();
+
+        $paginatedCollection = $pagerfantaFactory->createRepresentation(
+            $pager,
+            new Route('show_user_list', array(), true)
+        );
+
+        return $paginatedCollection;
     }
 
     /**
