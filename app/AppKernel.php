@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new BileMo\AppBundle\BileMoAppBundle(),
+            new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new OAuthServerBundle\OAuthServerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -3,40 +3,58 @@ services:
 #        class: BileMo\AppBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
-   BileMo\AppBundle\Controller\:
-       resource: '../../Controller'
-       public: true
-       tags: ['controller.service_arguments']
-       autowire: true
+    BileMo\AppBundle\Controller\:
+        resource: '../../Controller'
+        public: true
+        tags: ['controller.service_arguments']
+        autowire: true
 
-   BileMo\AppBundle\DataFixtures\MobilePhoneFixtures:
-       tags: [doctrine.fixture.orm]
+    BileMo\AppBundle\DataFixtures\MobilePhoneFixtures:
+        tags: [doctrine.fixture.orm]
 
-   BileMo\AppBundle\DataFixtures\DemoUserFixture:
-       tags: [doctrine.fixture.orm]
+    BileMo\AppBundle\DataFixtures\DemoUserFixture:
+        tags: [doctrine.fixture.orm]
 
-   BileMo\AppBundle\Event\Doctrine\User\HashPasswordListener:
-       autowire: true
-       tags: [doctrine.event_subscriber]
+    BileMo\AppBundle\Event\Doctrine\User\HashPasswordListener:
+        autowire: true
+        tags: [doctrine.event_subscriber]
+
+    BileMo\AppBundle\Repository\UserRepository:
+        factory:
+            - "@doctrine.orm.entity_manager"
+            - getRepository
+        arguments: [BileMo\AppBundle\Entity\User]
+
+    BileMo\AppBundle\Security\UserProvider:
+        arguments:
+            - '@BileMo\AppBundle\Repository\UserRepository'
+
 
 # Uncaught Exception handling
-   bile_mo_app.exception_subscriber:
-       class: BileMo\AppBundle\Event\ExceptionListener
-       arguments:
-           - '@jms_serializer'
-       tags:
-           - { name: kernel.event_subscriber }
+    bile_mo_app.exception_subscriber:
+        class: BileMo\AppBundle\Event\ExceptionListener
+        arguments:
+            - '@jms_serializer'
+        tags:
+            - { name: kernel.event_subscriber }
 
-   bile_mo_app.normalizer.not_found_http_exception:
-       class: BileMo\AppBundle\Normalizer\NotFoundHttpExceptionNormalizer
-       arguments:
-       - { type: 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' }
-       tags:
-       - { name: bilemo_app.normalizer }
+    bile_mo_app.normalizer.not_found_http_exception:
+        class: BileMo\AppBundle\Normalizer\NotFoundHttpExceptionNormalizer
+        arguments:
+            - { type: 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' }
+        tags:
+            - { name: bilemo_app.normalizer }
 
-   bile_mo_app.normalizer.resource_validation_exception:
-       class: BileMo\AppBundle\Normalizer\ResourceValidationExceptionNormalizer
-       arguments:
-       - { type: 'BileMo\AppBundle\Exception\ResourceValidationException' }
-       tags:
-       - { name: bilemo_app.normalizer }
+    bile_mo_app.normalizer.resource_validation_exception:
+        class: BileMo\AppBundle\Normalizer\ResourceValidationExceptionNormalizer
+        arguments:
+            - { type: 'BileMo\AppBundle\Exception\ResourceValidationException' }
+        tags:
+            - { name: bilemo_app.normalizer }
+
+    bile_mo_app.normalizer.authentication_credentials_not_found_exception:
+        class: BileMo\AppBundle\Normalizer\AuthenticationCredentialsNotFoundExceptionNormalizer
+        arguments:
+            - { type: 'Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException' }
+        tags:
+            - { name: bilemo_app.normalizer }

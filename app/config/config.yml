@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@BileMoAppBundle/Resources/config/services.yml" }
+    - { resource: "@OAuthServerBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -31,6 +32,10 @@ framework:
     assets: ~
     php_errors:
         log: true
+
+    # Workaround for FOSOauthServerBundle
+    templating:
+        engines: ['twig']
 
 # Twig Configuration
 twig:
@@ -87,6 +92,15 @@ fos_rest:
         rules:
         - { path: '^/', priorities: ['json'], fallback_format: 'json' }
 
+fos_oauth_server:
+    db_driver: orm       # Drivers available: orm, mongodb, or propel
+    client_class:        OAuthServerBundle\Entity\Client
+    access_token_class:  OAuthServerBundle\Entity\AccessToken
+    refresh_token_class: OAuthServerBundle\Entity\RefreshToken
+    auth_code_class:     OAuthServerBundle\Entity\AuthCode
+
+    service:
+        user_provider: BileMo\AppBundle\Security\UserProvider
 
 
 

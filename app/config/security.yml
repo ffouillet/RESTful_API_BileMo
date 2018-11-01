@@ -10,7 +10,6 @@ security:
         user_db_provider:
             entity:
                 class: BileMoAppBundle:User
-                property: username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -22,6 +21,16 @@ security:
             pattern: ^/api/doc
             security: false
 
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  false # can be omitted as its default value
+
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
+
         main:
             anonymous: ~
             # activate different ways to authenticate
@@ -31,3 +40,6 @@ security:
 
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
+
+    access_control:
+    - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }
