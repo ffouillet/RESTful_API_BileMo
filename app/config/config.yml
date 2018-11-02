@@ -76,8 +76,12 @@ nelmio_api_doc:
     areas:
         path_patterns: # an array of regexps
         - ^/api(?!/doc$)
-        host_patterns:
-        - ^api\.
+        host_patterns: ~
+    documentation:
+        info:
+            title: BileMo's Mobile phones API
+            description: BileMo's products catalog for your business.
+            version: 1.0.0
 
 fos_rest:
     body_converter:
