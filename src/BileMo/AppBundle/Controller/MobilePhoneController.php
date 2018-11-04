@@ -11,6 +11,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as REST;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Swagger\Annotations as SWG;
 
 class MobilePhoneController extends Controller
 {
@@ -22,18 +23,21 @@ class MobilePhoneController extends Controller
     }
 
     /**
+     *
+     * Get paginated list of BileMo's Mobile phones
+     *
      * @REST\Get("/mobiles", name="show_mobile_phones_list")
      * @REST\QueryParam(
      *     name="attributeToOrderBy",
      *     requirements="\w+",
-     *     default="",
-     *     description="Sort order [by name] (asc or desc)"
+     *     default="name",
+     *     description="Attribute to order mobile phones by (an attribute of the resource)"
      * )
      * @REST\QueryParam(
      *     name="order",
      *     requirements="asc|desc",
      *     default="asc",
-     *     description="Sort order [by name] (asc or desc)"
+     *     description="Sort order (asc or desc)"
      * )
      * @REST\QueryParam(
      *     name="limit",
@@ -48,6 +52,19 @@ class MobilePhoneController extends Controller
      *     description="The pagination offset"
      * )
      * @REST\View(StatusCode = 200)
+     *
+     * @SWG\Get(
+     *     description="Get paginated list of BileMo's Mobile phones",
+     *     tags = {"Mobile Phones"},
+     *     @SWG\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *     ),
+     *     @SWG\Response(
+     *         response="401",
+     *         description="Unauthorized: OAuth2 authentication required. Missing or invalid Access Token.",
+     *     )
+     * )
      */
     public function listAction(ParamFetcherInterface $paramFetcher)
     {
@@ -70,12 +87,39 @@ class MobilePhoneController extends Controller
     }
 
     /**
+     *
+     * Get one BileMo's Mobile phone details
+     *
      * @REST\Get(
      *		path = "/mobiles/{id}",
      *		name = "show_mobile_phone_details",
      *		requirements = {"id"="\d+"}
      * )
      * @REST\View(StatusCode = 200)
+     *
+     * @SWG\Get(
+     *     description="Get one BileMo's Mobile phone details",
+     *     tags = {"Mobile Phones"},
+     *     @SWG\Parameter(
+     *          name="id",
+     *          required= true,
+     *          in="path",
+     *          type="integer",
+     *          description="Mobile phone's unique identifier",
+     *     ),
+     *     @SWG\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *     ),
+     *     @SWG\Response(
+     *         response="401",
+     *         description="Unauthorized: OAuth2 authentication required. Missing or invalid Access Token.",
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Mobile Phone doesn't exist (Resource not found)",
+     *     )
+     * )
      */
     public function showAction(MobilePhone $mobilePhone)
     {

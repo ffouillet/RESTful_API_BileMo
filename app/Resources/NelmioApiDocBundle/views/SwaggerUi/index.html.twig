@@ -1,0 +1,15 @@
+{% extends '@!NelmioApiDoc/SwaggerUi/index.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock stylesheets %}
+
+{% block header %}
+    <div id="logo" href="#"><img src="{{ asset('img/bilemo-logo.png') }}" alt="BileMo"></div>
+{% endblock header %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/vendor/swagger-ui-3.1.19.4/swagger-ui-bundle.js') }}"></script>
+    <script src="{{ asset('js/vendor/swagger-ui-3.1.19.4/swagger-ui-standalone-preset.js') }}"></script>
+{% endblock javascripts %}

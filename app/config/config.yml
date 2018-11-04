@@ -76,8 +76,21 @@ nelmio_api_doc:
     areas:
         path_patterns: # an array of regexps
         - ^/api(?!/doc$)
-        host_patterns:
-        - ^api\.
+        host_patterns: ~
+    documentation:
+        info:
+            title: BileMo's Mobile phones API
+            description: BileMo's products catalog for your business.
+            version: 1.0.0
+        securityDefinitions:
+            password:
+                type: oauth2
+                description: provides a password flow access_token
+                flow: password
+                tokenUrl: /oauth/v2/token
+                name: Authorization
+        security:
+        -   password: []
 
 fos_rest:
     body_converter:
