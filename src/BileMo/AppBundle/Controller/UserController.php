@@ -4,7 +4,6 @@ namespace BileMo\AppBundle\Controller;
 
 use BileMo\AppBundle\Entity\User;
 use BileMo\AppBundle\Exception\ResourceValidationException;
-use BileMo\AppBundle\Representation\Users;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as REST;
@@ -14,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Swagger\Annotations as SWG;
 
 class UserController extends Controller
 {
@@ -25,18 +25,21 @@ class UserController extends Controller
     }
 
     /**
+     * Get paginated list of users
+     *
      * @REST\Get("/users", name="show_user_list")
+     *
      * @REST\QueryParam(
      *     name="attributeToOrderBy",
      *     requirements="\w+",
-     *     default="",
-     *     description="Sort order [by name] (asc or desc)"
+     *     default="username",
+     *     description="Attribute to order users by (an attribute of the resource)"
      * )
      * @REST\QueryParam(
      *     name="order",
      *     requirements="asc|desc",
      *     default="asc",
-     *     description="Sort order [by name] (asc or desc)"
+     *     description="Sort order (asc or desc)"
      * )
      * @REST\QueryParam(
      *     name="limit",
@@ -50,7 +53,21 @@ class UserController extends Controller
      *     default="0",
      *     description="The pagination offset"
      * )
+     *
      * @REST\View(StatusCode = 200)
+     *
+     * @SWG\Get(
+     *     description="Get the list of users.",
+     *     tags = {"Users"},
+     *     @SWG\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *     ),
+     *     @SWG\Response(
+     *         response="401",
+     *         description="Unauthorized: OAuth2 authentication required. Missing or invalid Access Token.",
+     *     )
+     * )
      */
     public function listAction(ParamFetcherInterface $paramFetcher)
     {
@@ -73,12 +90,39 @@ class UserController extends Controller
     }
 
     /**
+     *
+     * Get one user's details
+     *
      * @REST\Get(
      *		path = "/users/{id}",
      *		name = "show_user_details",
      *		requirements = {"id"="\d+"}
      * )
      * @REST\View(StatusCode = 200)
+     *
+     * @SWG\Get(
+     *     description="Get one user's details",
+     *     tags = {"Users"},
+     *     @SWG\Parameter(
+     *          name="id",
+     *          required= true,
+     *          in="path",
+     *          type="integer",
+     *          description="User's unique identifier",
+     *     ),
+     *     @SWG\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *     ),
+     *     @SWG\Response(
+     *         response="401",
+     *         description="Unauthorized: OAuth2 authentication required. Missing or invalid Access Token.",
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="User doesn't exist (Resource not found)",
+     *     )
+     * )
      */
     public function showAction(User $user)
     {
@@ -86,6 +130,9 @@ class UserController extends Controller
     }
 
     /**
+     *
+     * Create a user
+     *
      * @REST\Post(
      *     path = "/users",
      *     name = "create_user"
@@ -115,6 +162,23 @@ class UserController extends Controller
      *		name = "last_name",
      * 		description = "User's last name.",
      *      strict = false
+     * )
+     *
+     * @SWG\Post(
+     *     description="Create a user",
+     *     tags = {"Users"},
+     *     @SWG\Response(
+     *          response=201,
+     *          description="Created"
+     *     ),
+     *      @SWG\Response(
+     *         response="400",
+     *         description="Invalid json message received",
+     *     ),
+     *     @SWG\Response(
+     *         response="401",
+     *         description="Unauthorized: OAuth2 authentication required. Missing or invalid Access Token.",
+     *     )
      * )
      */
     public function createAction(ParamFetcherInterface $paramFetcher, ValidatorInterface $validator){
@@ -158,15 +222,47 @@ class UserController extends Controller
     }
 
     /**
+     *
+     * Delete a user
+     *
      * @REST\Delete(
      *		path = "/users/{id}",
      *		name = "delete_user",
      *		requirements = {"id"="\d+"}
      * )
      * @REST\View(StatusCode = 204)
+     *
+     * @SWG\Delete(
+     *     description="Delete a user",
+     *     tags = {"Users"},
+     *     @SWG\Parameter(
+     *          name="id",
+     *          required= true,
+     *          in="path",
+     *          type="integer",
+     *          description="User's unique identifier",
+     *     ),
+     *     @SWG\Response(
+     *          response=204,
+     *          description="User deleted (successful operation)"
+     *     ),
+     *     @SWG\Response(
+     *         response="401",
+     *         description="Unauthorized: OAuth2 authentication required. Missing or invalid Access Token.",
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="User doesn't exist (Resource not found)",
+     *     )
+     * )
      */
     public function deleteAction(User $user)
     {
+        // Unallow "demoUser" deletion
+        if ($user->getUsername() == 'demoUser') {
+            throw new \Exception('Sorry but you are not allowed to delete the Demo User');
+        }
+
         $this->em->remove($user);
         $this->em->flush();
     }
