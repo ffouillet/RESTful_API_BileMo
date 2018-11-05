@@ -41,7 +41,8 @@ You'll then see a list of every request you can make to the API.
 Each request you can make requires you to be authenticated.
 To authenticate, just click the 'Authorize' Button.  
   
-![Api Documentation preview](https://github.com/ffouillet/RESTful_API_BileMo/blob/master/web/img/github_readme/authorize_button.jpg)
+![Api Documentation preview](https://github.com/ffouillet/RESTful_API_BileMo/blob/master/web/img/github_readme/authorize_button.jpg)  
+  
 Then fill input fields with requested informations :  
 ```username``` : demoUser (leaves it as is if yo use the demo user or set your own if you created a user)
 ```password``` : demoPassword (leaves it as is if yo use the demo user or set your own if you created a user)
