@@ -16,11 +16,7 @@ class CreateClientCommand extends ContainerAwareCommand
     }
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($input->getOption('redirect_url') == "") {
-            throw new \InvalidArgumentException('Please enter the redirect_url (url redirection after authorization)');
-        } else {
-            $url = $input->getOption('redirect_url');
-        }
+        $url = $input->getOption('redirect_url');
 
         $clientManager = $this->getContainer()->get('fos_oauth_server.client_manager.default');
         $client = $clientManager->createClient();
