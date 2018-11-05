@@ -35,10 +35,10 @@ If you want to use a different grant_type/authentication flow, please create you
 You can test the project directly in the API Documentation Sandbox.  
 To do so, go to ```/api/doc (http://url-pointing-to-yourproject/api/doc)```.  (This route does not requires authentication)  
 You'll then see a list of every request you can make to the API.  
-![Api Documentation preview](https://github.com/ffouillet/RESTful_API_BileMo/master/web/img/github_readme/api_doc.jpg)
+![Api Documentation preview](https://github.com/ffouillet/RESTful_API_BileMo/blob/master/web/img/github_readme/api_doc.jpg)
 Each request you can make requires you to be authenticated.
 To authenticate, just click the 'Authorize' Button.  
-![Api Documentation preview](https://github.com/ffouillet/RESTful_API_BileMo/master/web/img/github_readme/aauthorize_button.jpg)
+![Api Documentation preview](https://github.com/ffouillet/RESTful_API_BileMo/blob/master/web/img/github_readme/authorize_button.jpg)
 Then fill input fields with requested informations :  
 ```username``` : demoUser (leaves it as is if yo use the demo user or set your own if you created a user)
 ```password``` : demoPassword (leaves it as is if yo use the demo user or set your own if you created a user)
