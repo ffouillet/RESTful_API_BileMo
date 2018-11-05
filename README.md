@@ -63,8 +63,8 @@ To get an Access Token you'll have to send a POST request at the following url :
     "client_id": "client_id given by the createClient command (see 1. How to create a client) ",
     "client_secret" : "client secret given by the createClient command (see 1. How to create a client)",
     "grant_type" : "password", 
-    "username" : "demoUser (leaves it as is if yo use the demo user or set your own if you created a user)",
-    "password" : "demoPassword (leaves it as is if yo use the demo user or set your own if you created a user)"
+    "username" : "demoUser (leaves it as is if you use the demo user or set your own if you created a user)",
+    "password" : "demoPassword (leaves it as is if you use the demo user or set your own if you created a user)"
 }
    
 ```
