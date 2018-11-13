@@ -3,12 +3,12 @@
 namespace BileMo\AppBundle\Controller;
 
 use BileMo\AppBundle\Entity\MobilePhone;
-use BileMo\AppBundle\Representation\MobilePhones;
 use Doctrine\ORM\EntityManagerInterface;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as REST;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Swagger\Annotations as SWG;
@@ -65,6 +65,8 @@ class MobilePhoneController extends Controller
      *         description="Unauthorized: OAuth2 authentication required. Missing or invalid Access Token.",
      *     )
      * )
+     *
+     * @Cache(maxage="30", public=true)
      */
     public function listAction(ParamFetcherInterface $paramFetcher)
     {
@@ -120,6 +122,8 @@ class MobilePhoneController extends Controller
      *         description="Mobile Phone doesn't exist (Resource not found)",
      *     )
      * )
+     *
+     * @Cache(lastModified="mobilePhone.getUpdatedAt()")
      */
     public function showAction(MobilePhone $mobilePhone)
     {
