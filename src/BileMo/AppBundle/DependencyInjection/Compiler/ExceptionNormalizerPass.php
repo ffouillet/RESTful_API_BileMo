@@ -13,8 +13,8 @@ class ExceptionNormalizerPass implements CompilerPassInterface
         $exceptionListenerDefinition = $container->findDefinition('bile_mo_app.exception_subscriber');
         $normalizers = $container->findTaggedServiceIds('bilemo_app.normalizer');
 
-        foreach ($normalizers as $id => $tags) {
-            $exceptionListenerDefinition->addMethodCall('addNormalizer', [new Reference($id)]);
+        foreach (array_keys($normalizers) as $normalizerId) {
+            $exceptionListenerDefinition->addMethodCall('addNormalizer', [new Reference($normalizerId)]);
         }
     }
 }
