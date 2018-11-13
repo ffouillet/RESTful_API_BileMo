@@ -63,6 +63,24 @@ class MobilePhone
     private $releasedAt;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="createdAt", type="datetime")
+     *
+     * @Expose
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updatedAt", type="datetime")
+     *
+     * @Expose
+     */
+    private $updatedAt;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="batteryCapacity", type="integer")
@@ -116,6 +134,10 @@ class MobilePhone
      */
     private $frontCameraResolution;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * Get id
