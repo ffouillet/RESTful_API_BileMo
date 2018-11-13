@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new BileMo\AppBundle\BileMoAppBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new OAuthServerBundle\OAuthServerBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -115,6 +115,11 @@ fos_oauth_server:
     service:
         user_provider: BileMo\AppBundle\Security\UserProvider
 
+stof_doctrine_extensions:
+    orm:
+        default:
+            timestampable: true
+
 
 
 
