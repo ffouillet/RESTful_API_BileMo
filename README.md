@@ -1,4 +1,7 @@
 # RESTful API BileMo
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5a2f426353c144f492020c85e2cb14d2)](https://app.codacy.com/app/ffouillet/RESTful_API_BileMo?utm_source=github.com&utm_medium=referral&utm_content=ffouillet/RESTful_API_BileMo&utm_campaign=Badge_Grade_Dashboard)
+
 ===============
 
 An API provided by a mobile phone manufacturer for businesses.
