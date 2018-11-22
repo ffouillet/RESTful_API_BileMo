@@ -1,3 +1,12 @@
-#bilemo-logo {
+#logo #bilemo-logo {
     height: auto;
+}
+
+.auth-container > div > div:nth-of-type(2) > div > .wrapper:nth-of-type(3) {
+    margin-top: 10px;
+}
+
+#swagger-ui.api-platform .auth-container > div > div:nth-of-type(2) > div > .wrapper:nth-of-type(3),
+#swagger-ui.api-platform .auth-container > div > div:nth-of-type(2) > div > .wrapper:nth-of-type(4) {
+    padding: 0px 120px;
 }
