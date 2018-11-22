@@ -34,8 +34,6 @@ class ExceptionListener implements EventSubscriberInterface
 
         if (null == $result) {
 
-            dump($event->getException());
-
             $result['code'] = Response::HTTP_BAD_REQUEST;
 
             $result['body'] = [

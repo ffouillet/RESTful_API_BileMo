@@ -1,5 +1,5 @@
 {
-    "name": "felix/my_project_name",
+    "name": "felix/restful_api_bilemo",
     "license": "proprietary",
     "type": "project",
     "autoload": {

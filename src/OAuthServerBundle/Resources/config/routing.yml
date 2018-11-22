@@ -1,3 +1,0 @@
-o_auth_server_homepage:
-    path:     /
-    defaults: { _controller: OAuthServerBundle:Default:index }
