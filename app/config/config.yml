@@ -106,13 +106,13 @@ fos_rest:
 
 fos_oauth_server:
     db_driver: orm       # Drivers available: orm, mongodb, or propel
-    client_class:        BileMo\AppBundle\Entity\OAuth\Client
-    access_token_class:  BileMo\AppBundle\Entity\OAuth\AccessToken
-    refresh_token_class: BileMo\AppBundle\Entity\OAuth\RefreshToken
-    auth_code_class:     BileMo\AppBundle\Entity\OAuth\AuthCode
+    client_class:        AppBundle\Entity\OAuth\Client
+    access_token_class:  AppBundle\Entity\OAuth\AccessToken
+    refresh_token_class: AppBundle\Entity\OAuth\RefreshToken
+    auth_code_class:     AppBundle\Entity\OAuth\AuthCode
 
     service:
-        user_provider: BileMo\AppBundle\Security\UserProvider
+        user_provider: AppBundle\Security\UserProvider
 
 stof_doctrine_extensions:
     orm:

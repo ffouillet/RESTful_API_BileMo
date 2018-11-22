@@ -1,0 +1,60 @@
+services:
+#    bile_mo_app.example:
+#        class: AppBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    AppBundle\Controller\:
+        resource: '../../Controller'
+        public: true
+        tags: ['controller.service_arguments']
+        autowire: true
+
+    AppBundle\DataFixtures\MobilePhoneFixtures:
+        tags: [doctrine.fixture.orm]
+
+    AppBundle\DataFixtures\DemoUserFixture:
+        tags: [doctrine.fixture.orm]
+
+    AppBundle\Event\Doctrine\User\HashPasswordListener:
+        autowire: true
+        tags: [doctrine.event_subscriber]
+
+    AppBundle\Repository\UserRepository:
+        factory:
+            - "@doctrine.orm.entity_manager"
+            - getRepository
+        arguments: [AppBundle\Entity\User]
+
+    AppBundle\Security\UserProvider:
+        arguments:
+            - '@AppBundle\Repository\UserRepository'
+
+
+# Uncaught Exception handling
+    bile_mo_app.exception_subscriber:
+        class: AppBundle\Event\ExceptionListener
+        arguments:
+            - '@jms_serializer'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    bile_mo_app.normalizer.not_found_http_exception:
+        class: AppBundle\Normalizer\NotFoundHttpExceptionNormalizer
+        arguments:
+            - { type: 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' }
+        tags:
+            - { name: bilemo_app.normalizer }
+
+    bile_mo_app.normalizer.resource_validation_exception:
+        class: AppBundle\Normalizer\ResourceValidationExceptionNormalizer
+        arguments:
+            - { type: 'AppBundle\Exception\ResourceValidationException' }
+        tags:
+            - { name: bilemo_app.normalizer }
+
+    bile_mo_app.normalizer.authentication_credentials_not_found_exception:
+        class: AppBundle\Normalizer\AuthenticationCredentialsNotFoundExceptionNormalizer
+        arguments:
+            - { type: 'Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException' }
+        tags:
+            - { name: bilemo_app.normalizer }
