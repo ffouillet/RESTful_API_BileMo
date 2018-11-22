@@ -23,7 +23,6 @@ class AppKernel extends Kernel
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new BileMo\AppBundle\BileMoAppBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
-            new OAuthServerBundle\OAuthServerBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         ];
 

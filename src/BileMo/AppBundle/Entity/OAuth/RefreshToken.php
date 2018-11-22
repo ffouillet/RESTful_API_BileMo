@@ -1,13 +1,13 @@
 <?php
-namespace OAuthServerBundle\Entity;
+namespace BileMo\AppBundle\Entity\OAuth;
 
-use FOS\OAuthServerBundle\Entity\AccessToken as BaseAccessToken;
+use FOS\OAuthServerBundle\Entity\RefreshToken as BaseRefreshToken;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  */
-class AccessToken extends BaseAccessToken
+class RefreshToken extends BaseRefreshToken
 {
     /**
      * @ORM\Id

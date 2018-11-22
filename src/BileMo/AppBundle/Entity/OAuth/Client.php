@@ -1,5 +1,5 @@
 <?php
-namespace OAuthServerBundle\Entity;
+namespace BileMo\AppBundle\Entity\OAuth;
 
 use FOS\OAuthServerBundle\Entity\Client as BaseClient;
 use Doctrine\ORM\Mapping as ORM;

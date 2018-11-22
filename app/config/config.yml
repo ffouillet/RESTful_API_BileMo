@@ -3,7 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@BileMoAppBundle/Resources/config/services.yml" }
-    - { resource: "@OAuthServerBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -107,10 +106,10 @@ fos_rest:
 
 fos_oauth_server:
     db_driver: orm       # Drivers available: orm, mongodb, or propel
-    client_class:        OAuthServerBundle\Entity\Client
-    access_token_class:  OAuthServerBundle\Entity\AccessToken
-    refresh_token_class: OAuthServerBundle\Entity\RefreshToken
-    auth_code_class:     OAuthServerBundle\Entity\AuthCode
+    client_class:        BileMo\AppBundle\Entity\OAuth\Client
+    access_token_class:  BileMo\AppBundle\Entity\OAuth\AccessToken
+    refresh_token_class: BileMo\AppBundle\Entity\OAuth\RefreshToken
+    auth_code_class:     BileMo\AppBundle\Entity\OAuth\AuthCode
 
     service:
         user_provider: BileMo\AppBundle\Security\UserProvider
