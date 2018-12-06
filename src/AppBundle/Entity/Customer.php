@@ -27,9 +27,9 @@ class Customer implements UserInterface
      *
      * Contains company's full name
      *
-     * @ORM\Column(name="fullName", type="string", length=255, unique=true)
+     * @ORM\Column(name="companyName", type="string", length=255, unique=true)
      */
-    private $fullName;
+    private $companyName;
 
     /**
      * @var string
@@ -244,27 +244,27 @@ class Customer implements UserInterface
     }
 
     /**
-     * Set fullName
+     * Set companyName
      *
-     * @param string $fullName
+     * @param string $companyName
      *
      * @return Customer
      */
-    public function setFullName($fullName)
+    public function setFullName($companyName)
     {
-        $this->fullName = $fullName;
+        $this->companyName = $companyName;
 
         return $this;
     }
 
     /**
-     * Get fullName
+     * Get companyName
      *
      * @return string
      */
     public function getFullName()
     {
-        return $this->fullName;
+        return $this->companyName;
     }
 
     /**
