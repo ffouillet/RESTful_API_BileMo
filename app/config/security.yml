@@ -9,7 +9,7 @@ security:
     providers:
         user_db_provider:
             entity:
-                class: BileMoAppBundle:User
+                class: AppBundle:User
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs

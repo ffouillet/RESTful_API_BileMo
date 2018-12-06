@@ -72,7 +72,7 @@ class UserController extends Controller
      */
     public function listAction(ParamFetcherInterface $paramFetcher)
     {
-        $pager = $this->em->getRepository('BileMoAppBundle:User')->findAllPaginated(
+        $pager = $this->em->getRepository('AppBundle:User')->findAllPaginated(
             $paramFetcher->get('limit'),
             $paramFetcher->get('offset'),
             $paramFetcher->get('attributeToOrderBy'),
