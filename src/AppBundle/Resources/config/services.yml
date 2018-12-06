@@ -12,10 +12,10 @@ services:
     AppBundle\DataFixtures\MobilePhoneFixtures:
         tags: [doctrine.fixture.orm]
 
-    AppBundle\DataFixtures\DemoUserFixture:
+    AppBundle\DataFixtures\DemoCustomerAndUsersFixture:
         tags: [doctrine.fixture.orm]
 
-    AppBundle\Event\Doctrine\User\HashPasswordListener:
+    AppBundle\Event\Doctrine\HashPasswordListener:
         autowire: true
         tags: [doctrine.event_subscriber]
 
