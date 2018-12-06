@@ -45,15 +45,15 @@ To authenticate, just click the 'Authorize' Button.
 ![Api Documentation preview](https://github.com/ffouillet/RESTful_API_BileMo/blob/master/web/img/github_readme/authorize_button.jpg)  
   
 Then fill input fields with requested informations :  
-```username``` : demoUser (leaves it as is if yo use the demo user or set your own if you created a user)
-```password``` : demoPassword (leaves it as is if yo use the demo user or set your own if you created a user)
+```username``` : demoUser (leaves it as is if you use the demo user or set your own if you created a user)  
+```password``` : demoPassword (leaves it as is if you use the demo user or set your own if you created a user)  
 ```type``` : Request body  
 ```client_id``` : client_id given by the createClient command (see 1. How to create a client)  
 ``` client_secret ``` : client secret given by the createClient command (see 1. How to create a client)  
 
 If the information you sent are correct, you are now logged in and able to send request to the API.  
 Just click on a request you want to send then click the 'Try Out' button on the right, fill the parameters if you want (or leaves it at default) and hit the Execute button below parameters. 
-You'll be able to see API Response in the 'Responses' section, just below the 'Execute' button.
+You'll be able to see API Response in the 'Responses' section, just below the 'Execute' button.  
 __Warning__ : If you are not authenticated, each request will result in a 401 Unauthorized Response. 
 
 #### 2. b. Trying the project manually (manually forging request)
