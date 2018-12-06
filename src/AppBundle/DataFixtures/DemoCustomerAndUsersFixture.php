@@ -14,22 +14,28 @@ class DemoCustomerAndUsersFixture extends Fixture
     public function load(ObjectManager $manager)
     {
         $demoCustomer = new Customer();
-        $demoCustomer->setFullName('BileMo\'s Demo Customer');
+        $demoCustomer->setCompanyName('BileMo\'s Demo Customer Company');
         $demoCustomer->setUsername('bileMoDemoCustomer');
+        $demoCustomer->setPlainPassword('bileMoDemoCustomerPassword');
         $demoCustomer->setEmail('demoCustomer@demoCustomerMobileShop.com');
         $demoCustomer->setWebsiteUrl('http://www.bileMoDemoCustomerMobileShop.com');
 
+        $manager->persist($demoCustomer);
 
-        $demoUser = new User();
+        // Generate demoCustomer's users.
+        for($i = 0; $i <= 10; $i++) {
 
-        $demoUser->setUsername('demoUser');
-        $demoUser->setPlainPassword('demoPassword');
-        $demoUser->setEmail('demoMail@demo.com');
-        $demoUser->setFirstName('DemoFirstName');
-        $demoUser->setLastName('DemoLastName');
-        $demoUser->setCreatedAt(new \DateTime());
+            $demoUser = new User();
+            $demoUser->setUsername('demoUser'.$i);
+            $demoUser->setPlainPassword('demoPassword'.$i);
+            $demoUser->setEmail('demoMail'.$i.'@demo.com');
+            $demoUser->setFirstName('DemoUser'.$i.'FirstName');
+            $demoUser->setLastName('DemoUser'.$i.'LastName');
+            $demoUser->setCreatedAt(new \DateTime());
+            $demoUser->setCustomer($demoCustomer);
 
-        $manager->persist($demoUser);
+            $manager->persist($demoUser);
+        }
 
         $manager->flush();
     }
