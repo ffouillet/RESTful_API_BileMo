@@ -3,6 +3,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Customer;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 class UserRepository extends AbstractRepository
@@ -31,7 +32,13 @@ class UserRepository extends AbstractRepository
         $qb->andWhere('u.customer = :customer');
         $qb->setParameters(['id' => $id, 'customer' => $customer]);
 
-        return $qb->getQuery()->getSingleResult();
+        try {
+            $user = $qb->getQuery()->getSingleResult();
+        } catch (NoResultException $e) {
+            $user = null;
+        }
+
+        return $user;
     }
 
 }
