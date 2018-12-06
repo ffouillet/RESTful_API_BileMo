@@ -73,11 +73,6 @@ class Customer implements UserInterface
      */
     private $subscribedAt;
 
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -98,11 +93,13 @@ class Customer implements UserInterface
     /**
      * Get roles
      *
-     * @return array
+     * No roles for customer for now.
+     *
+     * @return null
      */
     public function getRoles()
     {
-        return $this->roles;
+        return null;
     }
 
     /**
@@ -308,20 +305,6 @@ class Customer implements UserInterface
     public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Set roles
-     *
-     * @param \json $roles
-     *
-     * @return Customer
-     */
-    public function setRoles(\json $roles)
-    {
-        $this->roles = $roles;
 
         return $this;
     }
