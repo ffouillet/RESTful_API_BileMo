@@ -112,7 +112,7 @@ fos_oauth_server:
     auth_code_class:     AppBundle\Entity\OAuth\AuthCode
 
     service:
-        user_provider: AppBundle\Security\UserProvider
+        user_provider: AppBundle\Security\CustomerProvider
 
 stof_doctrine_extensions:
     orm:
