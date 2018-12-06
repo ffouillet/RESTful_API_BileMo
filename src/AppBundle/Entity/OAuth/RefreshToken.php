@@ -26,5 +26,5 @@ class RefreshToken extends BaseRefreshToken
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $customer;
+    protected $user;
 }
