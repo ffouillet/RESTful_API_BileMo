@@ -244,30 +244,6 @@ class Customer implements UserInterface
     }
 
     /**
-     * Set companyName
-     *
-     * @param string $companyName
-     *
-     * @return Customer
-     */
-    public function setFullName($companyName)
-    {
-        $this->companyName = $companyName;
-
-        return $this;
-    }
-
-    /**
-     * Get companyName
-     *
-     * @return string
-     */
-    public function getFullName()
-    {
-        return $this->companyName;
-    }
-
-    /**
      * Set username
      *
      * @param string $username
@@ -293,5 +269,29 @@ class Customer implements UserInterface
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * Set companyName
+     *
+     * @param string $companyName
+     *
+     * @return Customer
+     */
+    public function setCompanyName($companyName)
+    {
+        $this->companyName = $companyName;
+
+        return $this;
+    }
+
+    /**
+     * Get companyName
+     *
+     * @return string
+     */
+    public function getCompanyName()
+    {
+        return $this->companyName;
     }
 }
