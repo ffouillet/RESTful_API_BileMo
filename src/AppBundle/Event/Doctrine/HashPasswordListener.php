@@ -56,9 +56,10 @@ class HashPasswordListener implements EventSubscriber
     /**
      * @param User $entity
      */
-    private function encodePassword(User $entity)
+    private function encodePassword(UserInterface $entity)
     {
-        if (method_exists($entity, 'getPlainPassword') && !$entity->getPlainPassword()) {
+
+        if (!method_exists($entity, 'getPlainPassword') || !$entity->getPlainPassword()) {
             return;
         }
 
