@@ -6,6 +6,7 @@ use AppBundle\Entity\User;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class HashPasswordListener implements EventSubscriber
 {
@@ -28,7 +29,7 @@ class HashPasswordListener implements EventSubscriber
     {
         $entity = $args->getEntity();
 
-        if (!$entity instanceof User) {
+        if (!$entity instanceof UserInterface) {
             return;
         }
 
@@ -40,7 +41,7 @@ class HashPasswordListener implements EventSubscriber
     {
         $entity = $args->getEntity();
 
-        if (!$entity instanceof User) {
+        if (!$entity instanceof UserInterface) {
             return;
         }
 
@@ -57,7 +58,7 @@ class HashPasswordListener implements EventSubscriber
      */
     private function encodePassword(User $entity)
     {
-        if (!$entity->getPlainPassword()) {
+        if (method_exists($entity, 'getPlainPassword') && !$entity->getPlainPassword()) {
             return;
         }
 
