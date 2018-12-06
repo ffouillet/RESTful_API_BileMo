@@ -108,7 +108,17 @@ class Customer implements UserInterface
     }
 
     /**
-     * Get roles
+     * Get plainPassword
+     *
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * Get password
      *
      * @return string
      */
