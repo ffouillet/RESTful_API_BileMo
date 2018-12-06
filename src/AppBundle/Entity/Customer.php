@@ -41,6 +41,11 @@ class Customer implements UserInterface
     private $username;
 
     /**
+     * Not persisted in db, used before password encoding.
+     */
+    private $plainPassword;
+
+    /**
      * @ORM\Column(type="string", length=64)
      */
     private $password;
@@ -253,6 +258,20 @@ class Customer implements UserInterface
     public function setUsername($username)
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Set plainPassword
+     *
+     * @param string $plainPassword
+     *
+     * @return Customer
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
