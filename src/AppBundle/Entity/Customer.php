@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Customer
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="customer")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CustomerRepository")
  */
-class Customer
+class Customer implements UserInterface
 {
     /**
      * @var int
@@ -24,9 +25,25 @@ class Customer
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * Contains company's full name
+     *
+     * @ORM\Column(name="fullName", type="string", length=255, unique=true)
      */
-    private $name;
+    private $fullName;
+
+    /**
+     * @var string
+     *
+     * For credentials only
+     *
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
+     */
+    private $username;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
 
     /**
      * @var string
@@ -56,10 +73,55 @@ class Customer
      */
     private $subscribedAt;
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->subscribedAt = new \DateTime();
+    }
+
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return null
+     */
+    public function getSalt()
+    {
+        return null;
     }
 
     /**
@@ -190,5 +252,10 @@ class Customer
     public function getSubscribedAt()
     {
         return $this->subscribedAt;
+    }
+
+    public function eraseCredentials()
+    {
+        $this->plainPassword = null;
     }
 }
