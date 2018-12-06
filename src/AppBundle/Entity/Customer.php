@@ -78,6 +78,13 @@ class Customer implements UserInterface
      */
     private $subscribedAt;
 
+    /**
+     * @var array
+     *
+     * @ORM\Column(type="array")
+     */
+    private $roles;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -104,7 +111,7 @@ class Customer implements UserInterface
      */
     public function getRoles()
     {
-        return null;
+        return $this->roles;
     }
 
     /**
@@ -322,5 +329,12 @@ class Customer implements UserInterface
     public function getCompanyName()
     {
         return $this->companyName;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }
