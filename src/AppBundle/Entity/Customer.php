@@ -82,6 +82,7 @@ class Customer implements UserInterface
     {
         $this->createdAt = new \DateTime();
         $this->subscribedAt = new \DateTime();
+        $this->roles = [];
     }
 
     /**
@@ -257,5 +258,71 @@ class Customer implements UserInterface
     public function eraseCredentials()
     {
         $this->plainPassword = null;
+    }
+
+    /**
+     * Set fullName
+     *
+     * @param string $fullName
+     *
+     * @return Customer
+     */
+    public function setFullName($fullName)
+    {
+        $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    /**
+     * Get fullName
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->fullName;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return Customer
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return Customer
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param \json $roles
+     *
+     * @return Customer
+     */
+    public function setRoles(\json $roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }
