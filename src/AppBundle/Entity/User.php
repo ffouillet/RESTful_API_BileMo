@@ -156,6 +156,11 @@ class User implements UserInterface, \Serializable
      */
     private $roles;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer")
+     * @ORM\JoinColumn()
+     */
+    private $customer;
 
     public function __construct()
     {
@@ -400,5 +405,29 @@ class User implements UserInterface, \Serializable
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \AppBundle\Entity\Customer $customer
+     *
+     * @return User
+     */
+    public function setCustomer(\AppBundle\Entity\Customer $customer = null)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \AppBundle\Entity\Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }
