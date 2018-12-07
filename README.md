@@ -2,7 +2,7 @@
 ===============
 
 An API provided by a mobile phone manufacturer for businesses.
-The API allow users/clients to access BileMo's mobile phone catalog.
+The API allow Bilemo's Customers/Partners to access BileMo's mobile phone catalog and gives them the possibility to handle their users datas.
 A Symfony 3.4 Project.
 [Try the project without installing it here (via the API documentation)](http://bilemo.ffouillet.fr/api/doc)
 
@@ -18,18 +18,18 @@ A Symfony 3.4 Project.
 ## Running the installed project  
 
 ### Adding Test datas
-You can add a Demo User and some BileMo's Mobile Phones to test the project.
-Run the following command in the project directory to add 1 User (username : demoUser, password : demoPassword), 30 BileMo's Mobile phones :  
+You can add Demo Customers, Users associated with them and some BileMo's Mobile Phones to test the project.
+Run the following command in the project directory to add 2 Customer ([credentials here](https://github.com/ffouillet/RESTful_API_BileMo/blob/master/src/AppBundle/DataFixtures/DemoCustomerAndUsersFixture.php)) with a set of 10 users and 30 BileMo's Mobile phones :  
 ``` php bin/console doctrine:fixtures:load ```
 ### Trying the installed project
-This API use [OAuth2](https://oauth.net/2/) to authenticate users. The OAuth2 grant type for this project is 'Resource-Owner-Password-Credentails-Grant' more simply called 'password'. 
-To test the project, you'll need to be authenticated, so it requires to have at least one client (procedure for adding a client is explained below) and one user created (use test datas above (recommended) or create your own user) in order to authenticate via OAuth2.  
+This API use [OAuth2](https://oauth.net/2/) to authenticate Bilemo 's customers. The OAuth2 grant type for this project is 'Resource-Owner-Password-Credentails-Grant' more simply called 'password'. 
+To test the project, you'll need to be authenticated, so it requires to have at least one client (procedure for adding a client is explained below) and one customer created (use test datas above (recommended) or create your own customer) in order to authenticate via OAuth2.  
 
 #### 1. How to create a client
 To create a client, run the following command in the project directory :  
 ```php bin/console createClient```
-This will create a client with OAuth2 grand type set to 'password'.  
-The command will give you a 'client_id' and a 'client_secret' which will be required to authenticate a user in the API.  
+This will create a client with OAuth2 grand type set to 'password' and 'refresh_token'.  
+The command will give you a 'client_id' and a 'client_secret' which will be required to authenticate a customer in the API.  
 If you want to use a different grant_type/authentication flow, please create your own command.
 
 #### 2. a. Trying the project with the API Documentation Sandbox
@@ -45,8 +45,8 @@ To authenticate, just click the 'Authorize' Button.
 ![Api Documentation preview](https://github.com/ffouillet/RESTful_API_BileMo/blob/master/web/img/github_readme/authorize_button.jpg)  
   
 Then fill input fields with requested informations :  
-```username``` : demoUser (leaves it as is if you use the demo user or set your own if you created a user)  
-```password``` : demoPassword (leaves it as is if you use the demo user or set your own if you created a user)  
+```username``` : blueMobileShop (leaves it as is if you use a demo customer or set your own if you created a customer)  
+```password``` : blueMobilePassword (leaves it as is if you a the demo customer or set your own if you created a customer)  
 ```type``` : Request body  
 ```client_id``` : client_id given by the createClient command (see 1. How to create a client)  
 ``` client_secret ``` : client secret given by the createClient command (see 1. How to create a client)  
@@ -67,8 +67,8 @@ To get an Access Token you'll have to send a POST request at the following url :
     "client_id": "client_id given by the createClient command (see 1. How to create a client) ",
     "client_secret" : "client secret given by the createClient command (see 1. How to create a client)",
     "grant_type" : "password", 
-    "username" : "demoUser (leaves it as is if you use the demo user or set your own if you created a user)",
-    "password" : "demoPassword (leaves it as is if you use the demo user or set your own if you created a user)"
+    "username" : "blueMobileShop (leaves it as is if you use the demo customer or set your own if you created a customer)",
+    "password" : "blueMobilePassword (leaves it as is if you use the demo customer or set your own if you created a customer)"
 }
 ```
 Don't forget to add the ```Content-Type: application/json``` to your request header before sending it. 
