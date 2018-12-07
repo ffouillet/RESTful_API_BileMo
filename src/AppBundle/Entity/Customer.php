@@ -25,15 +25,6 @@ class Customer implements UserInterface
     /**
      * @var string
      *
-     * Contains company's full name
-     *
-     * @ORM\Column(name="companyName", type="string", length=255, unique=true)
-     */
-    private $companyName;
-
-    /**
-     * @var string
-     *
      * For credentials only
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
@@ -49,6 +40,15 @@ class Customer implements UserInterface
      * @ORM\Column(type="string", length=64)
      */
     private $password;
+
+    /**
+     * @var string
+     *
+     * Contains company's name
+     *
+     * @ORM\Column(name="companyName", type="string", length=255, unique=true)
+     */
+    private $companyName;
 
     /**
      * @var string
