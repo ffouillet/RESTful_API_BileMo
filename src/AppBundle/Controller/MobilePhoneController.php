@@ -70,7 +70,7 @@ class MobilePhoneController extends Controller
      */
     public function listAction(ParamFetcherInterface $paramFetcher)
     {
-        $pager = $this->em->getRepository('BileMoAppBundle:MobilePhone')->findAllPaginated(
+        $pager = $this->em->getRepository('AppBundle:MobilePhone')->findAllPaginated(
             $paramFetcher->get('limit'),
             $paramFetcher->get('offset'),
             $paramFetcher->get('attributeToOrderBy'),

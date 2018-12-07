@@ -5,7 +5,7 @@ fos_oauth_server_authorize:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
 
 bile_mo_app:
-    resource: "@BileMoAppBundle/Resources/config/routing.yml"
+    resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /api
 
 app.swagger_ui:

@@ -3,13 +3,14 @@
 security:
 
     encoders:
+        AppBundle\Entity\Customer: bcrypt
         AppBundle\Entity\User: bcrypt
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         user_db_provider:
             entity:
-                class: BileMoAppBundle:User
+                class: AppBundle:Customer
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs

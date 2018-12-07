@@ -2,7 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@BileMoAppBundle/Resources/config/services.yml" }
+    - { resource: "@AppBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -112,7 +112,7 @@ fos_oauth_server:
     auth_code_class:     AppBundle\Entity\OAuth\AuthCode
 
     service:
-        user_provider: AppBundle\Security\UserProvider
+        user_provider: AppBundle\Security\CustomerProvider
 
 stof_doctrine_extensions:
     orm:

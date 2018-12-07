@@ -9,9 +9,9 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as REST;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Swagger\Annotations as SWG;
@@ -26,7 +26,7 @@ class UserController extends Controller
     }
 
     /**
-     * Get paginated list of users
+     * Get paginated list of your users
      *
      * @REST\Get("/users", name="show_user_list")
      *
@@ -72,7 +72,9 @@ class UserController extends Controller
      */
     public function listAction(ParamFetcherInterface $paramFetcher)
     {
-        $pager = $this->em->getRepository('BileMoAppBundle:User')->findAllPaginated(
+
+        $pager = $this->em->getRepository('AppBundle:User')->findAllByCustomerPaginated(
+            $this->getUser(), // Get current authenticated Customer
             $paramFetcher->get('limit'),
             $paramFetcher->get('offset'),
             $paramFetcher->get('attributeToOrderBy'),
@@ -92,7 +94,7 @@ class UserController extends Controller
 
     /**
      *
-     * Get one user's details
+     * Get one of your user's details
      *
      * @REST\Get(
      *		path = "/users/{id}",
@@ -124,10 +126,16 @@ class UserController extends Controller
      *         description="User doesn't exist (Resource not found)",
      *     )
      * )
-     * @Cache(lastModified="user.getUpdatedAt()")
      */
-    public function showAction(User $user)
+    public function showAction($id)
     {
+        // Find currently authenthicated customer's user's by id
+        $user = $this->em->getRepository(User::class)->findOneByCustomerAndId($id, $this->getUser());
+
+        if (null === $user) {
+            throw new NotFoundHttpException('User you requested doesn\'t exists.');
+        }
+
         return $user;
     }
 
@@ -194,6 +202,7 @@ class UserController extends Controller
         $user->setPlainPassword($paramFetcher->get('password'));
         $user->setFirstName($paramFetcher->get('first_name'));
         $user->setLastName($paramFetcher->get('last_name'));
+        $user->setCustomer($this->getUser()); // Associate user with currently authenticated Customer
 
         // Validate user.
         $userValidationErrors = $validator->validate($user);
@@ -225,7 +234,7 @@ class UserController extends Controller
 
     /**
      *
-     * Delete a user
+     * Delete one of your users
      *
      * @REST\Delete(
      *		path = "/users/{id}",
@@ -258,11 +267,13 @@ class UserController extends Controller
      *     )
      * )
      */
-    public function deleteAction(User $user)
+    public function deleteAction($id)
     {
-        // Unallow "demoUser" deletion
-        if ($user->getUsername() == 'demoUser') {
-            throw new \Exception('Sorry but you are not allowed to delete the Demo User');
+        // Find currently authenthicated customer's user's by id
+        $user = $this->em->getRepository(User::class)->findOneByCustomerAndId($id, $this->getUser());
+
+        if (null === $user) {
+            throw new NotFoundHttpException();
         }
 
         $this->em->remove($user);

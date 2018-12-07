@@ -8,38 +8,38 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\NoResultException;
 
-class UserProvider implements UserProviderInterface
+class CustomerProvider implements UserProviderInterface
 {
-    protected $userRepository;
+    protected $customerRepository;
 
-    public function __construct(ObjectRepository $userRepository){
-        $this->userRepository = $userRepository;
+    public function __construct(ObjectRepository $customerRepository){
+        $this->customerRepository = $customerRepository;
     }
 
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($customername)
     {
-        $q = $this->userRepository
+        $q = $this->customerRepository
             ->createQueryBuilder('u')
             ->where('u.username = :username')
-            ->setParameter('username', $username)
+            ->setParameter('username', $customername)
             ->getQuery();
 
         try {
-            $user = $q->getSingleResult();
+            $customer = $q->getSingleResult();
         } catch (NoResultException $e) {
             $message = sprintf(
-                'Unable to find an active user identified by "%s". Please verify username.',
-                $username
+                'Unable to find an active customer identified by "%s". Please verify username.',
+                $customername
             );
             throw new UsernameNotFoundException($message, 0, $e);
         }
 
-        return $user;
+        return $customer;
     }
 
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $customer)
     {
-        $class = get_class($user);
+        $class = get_class($customer);
         if (!$this->supportsClass($class)) {
             throw new UnsupportedUserException(
                 sprintf(
@@ -49,12 +49,12 @@ class UserProvider implements UserProviderInterface
             );
         }
 
-        return $this->userRepository->find($user->getId());
+        return $this->customerRepository->find($customer->getId());
     }
 
     public function supportsClass($class)
     {
-        return $this->userRepository->getClassName() === $class
-            || is_subclass_of($class, $this->userRepository->getClassName());
+        return $this->customerRepository->getClassName() === $class
+            || is_subclass_of($class, $this->customerRepository->getClassName());
     }
 }
